@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.writeln( "№1 Определить сколько раз каждый элемент встречается в массиве.<br>")
+        const fruits = ['apple', 'apple', 'kiwi', 'babana', 'kiwi', 'apple'];
+        const fruitCounts = {};
+
+        fruits.forEach((fruit) => {
+            fruitCounts[fruit] = (fruitCounts[fruit] || 0) + 1;
+        });
+
+        // Вывод результата
+        for (let fruit in fruitCounts) {
+            document.writeln(`${fruit}: ${fruitCounts[fruit]}<br>`);
+        }
+        
+    </script>
+    <script>
+        document.writeln( "№2 Создать массив который содержит только уникальные значения исходного массива.<br>")
+
+        const fruitsы = ['apple', 'apple', 'kiwi', 'babana', 'kiwi', 'apple'];
+
+        // Способ 1: Использование Set
+        const uniqueFruitsSet = [...new Set(fruits)];
+        document.writeln("<p>Способ 1: Использование Set: " + uniqueFruitsSet.join(", ") + "</p>");
+
+        // Способ 2: Использование forEach и Object.keys
+        const uniqueFruitsForEach = [];
+        fruits.forEach((fruit) => {
+            if (!uniqueFruitsForEach.includes(fruit)) {
+                uniqueFruitsForEach.push(fruit);
+            }
+        });
+        document.writeln("<p>Способ 2: Использование forEach и Object. " + uniqueFruitsForEach.join(", ") + "</p>");
+        document.writeln("№3 Создать функцию, которая группирует студентов по возрасту.<br>");
+
+        const students = [
+            { name: 'alex', age: 25 },
+            { name: 'mike', age: 24 },
+            { name: 'masha', age: 29 },
+            { name: 'will', age: 11 },
+        ];
+
+        function groupStudentsByAge(students) {
+            return students.reduce((groups, student) => {
+                const age = student.age;
+                if (!groups[age]) {
+                    groups[age] = [];
+                }
+                groups[age].push(student);
+                return groups;
+            }, {});
+        }
+
+        const groupedStudents = groupStudentsByAge(students);
+
+        // Выводим результат в виде текста
+        for (let age in groupedStudents) {
+            document.writeln(`Группа студентов возраста ${age}:<br>`);
+            groupedStudents[age].forEach(student => {
+                document.writeln(`Имя: ${student.name}, Возраст: ${student.age}<br>`);
+            });
+            document.writeln("<br>");
+        }
+        
+        document.writeln( "№4 Требуется написать функцию, которая отвечает следующим требованиям: <br>")
+    
+        function findPairWithSum(arr, sum) {
+            const numSet = new Set();
+            const result = [];
+
+            for (let i = 0; i < arr.length; i++) {
+                const complement = sum - arr[i];
+                if (numSet.has(complement)) {
+                    result.push(complement, arr[i]);
+                    break;
+                } else {
+                    numSet.add(arr[i]);
+                }
+            }
+
+            return result.length > 0 ? result : [];
+        }
+
+        // Пример использования:
+        const array = [1, 2, 3, 4, 5];
+        const targetSum = 7;
+        const result = findPairWithSum(array, targetSum);
+        document.writeln(result); 
+    </script>
+  
+    
+    
+</body>
+</html>
